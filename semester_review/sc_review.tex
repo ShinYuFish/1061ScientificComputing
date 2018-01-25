@@ -1,0 +1,137 @@
+\documentclass[12pt,a4paper,draft]{article}
+
+\usepackage{geometry}
+\usepackage{fontspec}   %加這個就可以設定字體
+\usepackage{xeCJK}       %讓中英文字體分開設置
+\usepackage{fancyhdr}   %Required for custom header and footer 
+\usepackage{titlesec}     %Required for changing style of section/subsection
+\usepackage{ulem}
+\usepackage{amsmath,amsfonts,amssymb} %Requered for some specific math mode
+\usepackage{enumitem}
+\usepackage{graphicx} %Required to insert figure
+\usepackage{subcaption} %Required to set up subfigure environment
+\usepackage{blindtext} %used for inserting blind text
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+%setup layout of the document
+\geometry{a4paper,margin=0.7 in ,top = 1 in}
+\linespread{1.2}  %行距
+
+%setting environment for typing chinese
+\setCJKmainfont{標楷體} %設定中文為系統上的字型，而英文不去更動，使用原TeX字型
+\XeTeXlinebreaklocale "zh"             %這兩行一定要加，中文才能自動換行
+\XeTeXlinebreakskip = 0pt plus 1pt     %這兩行一定要加，中文才能自動換行
+
+%set up the header and footer
+\pagestyle{fancy}
+\lhead{\classname \ Note}
+\chead{}
+\rhead{\noteauthor}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.6pt} %size of header rule
+\renewcommand{\footrulewidth}{0.6pt} %size of footer rule
+
+% changing style of section caption
+\renewcommand\thesection{\arabic{section}.} 
+\renewcommand\thesubsection{\alph{subsection}}
+\titleformat{\section}
+	{\Large\bfseries}{\thesection}{.5em}{}
+%\titleformat{\subsection}[runin]
+%	{\normalfont\fontfamily{}{\fontsize{12}{17}}}{{(}\thesubsection{)}}{.5em}{}
+
+
+
+%name and title
+\newcommand{\classname}{Scientific Computing}
+\newcommand{\noteauthor}{Shin Yu Chen}
+
+
+\begin{document}
+\begin{center}
+\LARGE\textbf{\classname \ Semester Review}
+\end{center}
+\section{Matrix Manipulation}
+\section{Financial Computing}
+\section{K-means clustering}
+Objective: Deduction for unlabeled data
+\section{MLE for PDF}
+\section{ML for Classification}
+\begin{itemize}
+\item Deep Neural Network: given desired i/o pairs and construct a model with it(structure identification \&{} parameter identification)\\
+$\Rightarrow$  Multilayer perceptron
+\begin{itemize}
+\item >3 layers(deep neural network) for arbitrary regions
+\item Training: gradient descent(check:sec \ref{sec:GD})/Gauss-Newton method
+\item Chain rule \& partial derivative to implement a basic math model
+\end{itemize}
+\end{itemize}
+\section{Data Fitting and Regression Analysis} %done
+\begin{itemize}
+\item Data fitting :
+\begin{enumerate}
+\item Using \texttt{\textbackslash} to solve basic regression problem $A\theta = b\ \Rightarrow \ \theta = A\textbackslash b$
+\item Error sum function is the  objective function we want to minimize, can be shown as sum of squared error$\sum [y_i -f(x_i)]^2$
+\item MATLAB provide \texttt{polyfit} and \texttt{polyval} to simplify our codes.
+\end{enumerate}
+\item Least-squares Estimate 
+\begin{enumerate}
+\item $E(\theta) = (A\theta-b)^T(A\theta-b)$ $\nabla_\theta(\theta) = 0 $ $\Rightarrow \theta = (A^TA)^{-1}A^Tb$
+\item Application: distance to a line/plane \\
+$d^2 = \Big(\cfrac{a}{\sqrt{a^2+b^2}}\ x_0+\cfrac{b}{\sqrt{a^2+b^2}}\ y_0-\cfrac{c}{\sqrt{a^2+b^2}}\Big)^2$
+\end{enumerate}
+\item Non-linear Regression Problem
+$\Rightarrow $ Transformation\. example: $y=ae^{bx} \Rightarrow ln y=ln a +bx$ 
+\end{itemize}
+\section{Principal Component Analysis} %done
+\begin{itemize}
+\item Objective: Reduction of unlabelled data with dimensionality reduction, data variance $\uparrow$ \\
+* not design for clasification problem
+\item i/o: zero justified dataset $\Rightarrow$ unit vector \textbf{u }that square sum of dataset's projection onto \textbf{u} is maximized
+\item Application: line/plane fitting, machine learning, face recognition
+\item PCA for Total Least Squares: minimum projection on \textbf{y} means maximum projection on \textbf{x}, so \textbf{y} is the normal vector 
+\end{itemize}
+\section{Page Rank} %done
+\begin{itemize}
+\item Connectivity Matrix(row:in/column:out)$\Rightarrow$ Transition Probability Matrix \\
+$A = pA_1+(1-p)A_2 \qquad A_1$:follow with the link $A_2$:jump to random page\\
+\textit{PageRank}: z for initial state, $Az,A^2z...A^kz$,until $A^{k+1}z=A^kz$
+\item Compute Pagerank: eigenvector method/powermethod(for large n) 
+\item Eigenvalue and Characteristic
+\begin{enumerate}
+\item Row,Column sum with eigenvalue and eigenvector
+\item Eigenvalue Decomposition $A^k = VD^kV^{-1}$
+\end{enumerate}
+\item Application: Team ranking, university rank,recommendation
+\end{itemize}
+\section{Audio Basic} %done
+\begin{itemize}
+\item Parameter of recording audio file: sampling rate/Bit solution(8/16bits)/no. of channel
+\item Time domain vs Frequency domain
+\begin{center}
+\begin{tabular}{ccc} 
+ & Time & Frequency \\
+\hline 
+features& Period,Intensity,Timbre(Waveform)& Energy,Pitch,Timbre \\ 
+
+\end{tabular} 
+\end{center}
+\end{itemize}
+\section{Optimization}\label{sec:GD} %DSS Gradient Descent
+\begin{itemize}
+\item Gradient Descent: $x_{next} = x_{now} -\eta\nabla f(x_{now}) \qquad \eta$: learning rate\\
+* not guarantee for global optimum
+\item DSS
+\end{itemize}
+\section{Dynamic Programming} %done
+An effective method for finding optimum solution to a multi-stage decision problem.
+\begin{enumerate}
+\item Characteristic: Decomposition/Subproblem optimality
+\item Steps: Optimum-value function $\rightarrow$ Recurrent formula $\rightarrow$ Answer
+\item Applications: LCS,Edit distance, matrix chain products,hidden Markov model...
+\item Example :QBSH\\
+Find the alignment between the pitch vector of human's singing and the note vector of a given melody, both in the unit of semitone or MIDI number. \\
+$$ dist(p, q)=\min_{u_1, u_2, ... u_{m}}\sum_{i=1}^{m} |p(i)-q(u_i)|, $$ subject to $u_1=1$ and $u_1 \leq u_2 \leq u_3 \cdots \leq u_{m}$.
+\end{enumerate}
+\end{document}
