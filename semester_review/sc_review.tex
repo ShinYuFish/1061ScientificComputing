@@ -1,8 +1,6 @@
 \documentclass[12pt,a4paper,draft]{article}
 
 \usepackage{geometry}
-\usepackage{fontspec}   %加這個就可以設定字體
-\usepackage{xeCJK}       %讓中英文字體分開設置
 \usepackage{fancyhdr}   %Required for custom header and footer 
 \usepackage{titlesec}     %Required for changing style of section/subsection
 \usepackage{ulem}
@@ -18,11 +16,6 @@
 %setup layout of the document
 \geometry{a4paper,margin=0.7 in ,top = 1 in}
 \linespread{1.2}  %行距
-
-%setting environment for typing chinese
-\setCJKmainfont{標楷體} %設定中文為系統上的字型，而英文不去更動，使用原TeX字型
-\XeTeXlinebreaklocale "zh"             %這兩行一定要加，中文才能自動換行
-\XeTeXlinebreakskip = 0pt plus 1pt     %這兩行一定要加，中文才能自動換行
 
 %set up the header and footer
 \pagestyle{fancy}
