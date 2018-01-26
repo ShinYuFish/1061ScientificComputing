@@ -45,19 +45,78 @@
 \begin{center}
 \LARGE\textbf{\classname \ Semester Review}
 \end{center}
-\section{Matrix Manipulation}
-\section{Financial Computing}
-\section{K-means clustering}
-Objective: Deduction for unlabeled data
-\section{MLE for PDF}
+\section{MATLAB Basic Command}%done
+\begin{itemize}
+\item 2D plot, 3D plot
+\item m-file function
+\item array,matrix manipulation(vector calculation in MATLAB)
+\end{itemize}
+\section{Financial Computing}%done
+\begin{itemize}
+\item Compounding: basic formula:$f=p(1+r)^n$/rule of 70/rule of 200/how to compute mortgage 
+\item Internal Rate of Return: The rate at an  investment plan breaks even$$NPV = \sum_{i=0}^n \cfrac{c_i}{(1+r)^i} = 0\qquad NFV = \sum_{i=0}^n c_i(1+r)^{n-i} = 0$$
+\end{itemize}
+\section{K-means clustering}%done
+\begin{itemize}
+\item Objective: Deduction for unlabeled data, difference between input data set and cluster center should be as small as possible.
+\item Objective function:$$J(X_{d\times n};C_{d\times m,m<<n},A_{n\times m}) = \sum_{j=1}^m \sum_{i=1}^n a_{ij}\parallel x_i -c_j \parallel^2 \qquad A:assignment\  matrix$$
+\item Step: fixed C to find best A, fixed A to find best C, repeat above til converge
+$$a_{ij}\begin{cases} 1\ if j=arg \ min \parallel x_i -c_q \parallel^2\\ 0,otherwise\end{cases} \qquad c_i = \cfrac{\sum\limits_{i=1}^n a_{ij}x_i}{\sum\limits_{i=1}^na_{ij}}$$
+* guarantee to converge!(J is reduced repeatedly)
+\end{itemize}
+\section{Image Compression}%done
+\begin{itemize}
+\item True color: Each pixel is represented by [R,G,B]vector\\ Index-color: Each pixel is represented by an index into a color map of $2^b$ colors
+\item Compression Ratio
+$$ \rho = \cfrac{before}{after} = \cfrac{m*n*3*8}{m*n*\log_2c+c*3*8}\approx\cfrac{24}{\log_2c}$$
+\item Blocked Base Compression Ratio(application of k-means clustering):
+ $$ \rho = \cfrac{before}{after} = \cfrac{m*n*3*8}{\cfrac{m}{q}*\cfrac{n}{q}*\log_2c+c*3*8}\approx\cfrac{24q^2}{\log_2c+\cfrac{24cq^4}{m*n}}$$
+\end{itemize}
+\section{MLE for PDF}%done
+\begin{itemize}
+\item Maximum Likelihood Estimation: A way to find statistical model with optimum data\\
+$\Rightarrow$ Formulate objective function and derive parameter\\ 
+$\Rightarrow$ Inequality of Arithmetic and Geometric Means
+$$\cfrac{\sum\limits_{i=1}^{n}x_i}{n} \geq \Big(\prod_{i=1}^{n} x_i \Big)^{1/n}$$ equality holds only when $x_1 = x_2 = \cdots = x_n$
+\item Probability Density Function:
+\begin{itemize}
+\item $J(p,q,r) = p^{n1}q^{n2}r^{n3}$ ,with $p+q+r =1$,$p,q,r\geq 0$
+\item Common- Guassian Distribution:$g(x,\mu,\sigma^2) = \cfrac{1}{\sigma\sqrt{2\pi}}\ exp[-0.5(\cfrac{x-\mu}{\sigma})^2]$ \\MLE: $\mu = \cfrac{1}{n}\sum x_i \quad \sigma^2 = \cfrac{1}{n}\sum (x_i - \mu)^2$
+\end{itemize}
+\end{itemize}
 \section{ML for Classification}
 \begin{itemize}
+\item K-nearest Neighbour Classifier: Find first k nearest neighbour of a given point, determine the class by voting among those points.
+\begin{itemize}
+\item Voronoi Diagram
+\item PROS:intuitive/no computation for model construction \\ CONS:massive computation when data is big/no straightforward way 
+\end{itemize} 
+\item Quadratic Classifiers: Select a class of parameterized PDF then identify parameters via MLE\\
+$\Rightarrow$ test stage: $C = arg\ maxPr(C)*pdf_c(x)$
+\begin{itemize}
+\item Characteristic: decision boundary is quadratic function
+\item PROS: easy compute when data is small/easy for LOOCV\\
+CONS: covariance matrix is hard to compute or not exist/cannot handle bi-model data
+\end{itemize}
+\item Naive Bayes Classifiers:\\Identify class pdf $pdf_c = pdf_{1,c}*pdf_{2,c}*\cdots*pdf_{d,c}$\\
+$\Rightarrow$ test stage: $C = arg\ maxPr(C)*pdf_c(x)$
+\begin{itemize}
+\item Characteristic: statistical independent/each feature governed by a PDF
+\item PROS:Fast computation/Robust than QC\\
+CONS:not able to deal bi-model/class boundary not complex as QC
+\end{itemize}
+
 \item Deep Neural Network: given desired i/o pairs and construct a model with it(structure identification \&{} parameter identification)\\
 $\Rightarrow$  Multilayer perceptron
 \begin{itemize}
 \item >3 layers(deep neural network) for arbitrary regions
 \item Training: gradient descent(check:sec \ref{sec:GD})/Gauss-Newton method
 \item Chain rule \& partial derivative to implement a basic math model
+\end{itemize}
+\item Performance Evaluation: recognition rate$\uparrow$,error rate$\downarrow$,computation load$\downarrow$
+\begin{itemize}
+\item Stage:training set/validation set/test set
+\item Method:inside test/one-side holdout test/two-side holdout test/M-fold cross validation/leave one-out cross validation 
 \end{itemize}
 \end{itemize}
 \section{Data Fitting and Regression Analysis} %done
