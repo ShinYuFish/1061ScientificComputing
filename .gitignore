@@ -1,0 +1,6 @@
+
+*.aux
+*.log
+*.gz
+code/hw5/.DS_Store
+code/.DS_Store
